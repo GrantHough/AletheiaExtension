@@ -54,5 +54,28 @@ function verifyText(raw_text, request_source, popup_response) { // Universal che
         response_text = error.message;
         console.log("response_text:" + response_text)
         return response_text
+    })
+    .then(response_text => {
+        if (request_source == "contextMenu") {
+            (async () => {
+                const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true}); // Find current tab
+                const response = await chrome.tabs.sendMessage(tab.id, {response_text: response_text}, function(response) {
+                    if (chrome.runtime.lastError.message === "Could not establish connection. Receiving end does not exist.") {
+                        chrome.scripting.executeScript({
+                            target: { tabId: tab.id },
+                            files: ['content.js']
+                        });
+                        chrome.tabs.sendMessage(tab.id, {response_text: response_text});
+                    }
+                });
+            })();
+        }
+        else {
+            console.log("response_text:" + response_text)
+            if(response_text) {
+                popup_response(response_text);
+                console.log("Popup response sent")
+            }
+        }
     });
 }
