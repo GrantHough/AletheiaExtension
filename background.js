@@ -1,5 +1,6 @@
 // Service worker
-const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
+// const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app";
+const checkURL = "http://localhost:1000";
  
 //let activeURL;
 
@@ -16,6 +17,7 @@ chrome.contextMenus.onClicked.addListener(verifyHelper); // Listener for right-c
 
 chrome.runtime.onMessage.addListener( // Listener for popup in top right
     function(request, sender, sendResponse) {
+
         if (request.action == "check") {
             const response = verifyText(request.raw_text, "popup", sendResponse); // Call verify function, add sendResponse as function parameter
         }
@@ -78,7 +80,7 @@ function verifyText(raw_text, request_source, popup_response) { // Universal che
 }
 
 function articleBias(url, sendResponse) {
-    console.log("Attempting bias check")
+    console.log("Attempting bias check");
     console.log("URL" + url);
     fetch(checkURL + "/articlebias", {
         method: 'POST',
