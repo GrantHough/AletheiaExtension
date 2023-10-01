@@ -1,11 +1,11 @@
 // Service worker
-const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app/"
+const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
 
 function verifyText(raw_text, request_source, popup_response) { // Universal checking function
     console.log(raw_text);
     console.log(request_source);
     var response_text;
-    fetch(checkURL, {
+    fetch(checkURL + "/validate", {
         method: 'POST',
         body: JSON.stringify({
             text: raw_text, // Gather the text input from the DOM
