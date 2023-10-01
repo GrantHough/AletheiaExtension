@@ -1,5 +1,7 @@
 // Service worker
-const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
+// const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
+const checkURL = "http://localhost:1000";
+ 
 //let activeURL;
 
 chrome.contextMenus.removeAll(function() {
@@ -92,13 +94,13 @@ function articleBias(url, sendResponse) {
         }
     })
     .then(data => {
-        console.log(data.message)
-        response_text = data.message;
+        console.log(data.opinion)
+        response_text = data.opinion;
         return response_text
     })
     .catch((error) => {
         console.error(error);
-        response_text = error.message;
+        response_text = error.opinion;
         console.log("response_text:" + response_text)
         return response_text
     })
@@ -122,20 +124,20 @@ function articleSummary(url, sendResponse) {
     })
     .then(response => {
         if (response.ok) { // Only decode message if status ok, otherwise throw error
-            return response.json()
+            return response.json();
         }
         else {
             throw new Error("Error contacting the server: Error Code " + response.status);
         }
     })
     .then(data => {
-        console.log(data.message)
-        response_text = data.message;
+        console.log(data.summary)
+        response_text = data.summary;
         return response_text
     })
     .catch((error) => {
         console.error(error);
-        response_text = error.message;
+        response_text = error.summary;
         console.log("response_text:" + response_text)
         return response_text
     })
