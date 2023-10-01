@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
                 return url;
             })
             const response = await chrome.runtime.sendMessage({action: "bias", url: url});
-            set_return_text(response);
+            set_return_text(response.toFixed(2)*100 + "%");
             console.log(response);
           })();
     }
