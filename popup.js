@@ -2,9 +2,6 @@
 is clicked in the top right corner of the browser window.
 See popup.css and popup.html*/
 
-// const checkURL = "https://tempservergy-b7d8de4f1efb.herokuapp.com/check"
-const checkURL = "https://grantyanistempserver-kphgaowlda-uw.a.run.app/check"
-
 // Buttons
 const verify_button = document.getElementById("verify_button");
 const settings_button = document.getElementById("settings_button");

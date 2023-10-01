@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aletheia</title>
+    <title>GrantYanisTempExtension</title>
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-
+    <h1> Aletheia (Temp) </h1>
+    <div >
+        <textarea id="raw_text" placeholder="Copy paste a passage here..."></textarea>
+        <p id="return_text" style="display: none;"> Status Unknown </p>
+    </div>
+    <button id="verify_button" class="main_button"> Analyze Sentence </button>
+    <button id="return_button" class="main_button" style="display: none;"> New Request </button>
 </body>
 <script src="popup.js"></script>
 </html>

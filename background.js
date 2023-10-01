@@ -1,6 +1,29 @@
 // Service worker
 const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
 
+chrome.contextMenus.removeAll(function() {
+    chrome.contextMenus.create({
+     id: "1",
+     title: "VerifyAI",
+     contexts:["selection"],  // ContextType
+     type: "normal"
+    }); })
+
+chrome.contextMenus.onClicked.addListener(verifyHelper); // Listener for right-click context menu
+
+chrome.runtime.onMessage.addListener( // Listener for popup in top right
+    function(request, sender, sendResponse) {
+        if (request.action == "check") {
+            const response = verifyText(request.raw_text, "popup", sendResponse); // Call verify function, add sendResponse as function parameter
+        }
+        return true;
+    }
+  );
+
+function verifyHelper(info) { // Unwraps the selected text from right-click context menu
+    verifyText(info.selectionText, "contextMenu");
+}
+
 function verifyText(raw_text, request_source, popup_response) { // Universal checking function
     console.log(raw_text);
     console.log(request_source);
