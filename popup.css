@@ -1,0 +1,69 @@
+:root {
+    --background: #faedcd; /*E2DCCA; /*FCE694;*/
+    --button: #36393B;/*2E382E; /*36393B; /*373737; */
+    --background-2: #fefae0; /*ADB0C2; /*BAA1B6;/*A99985;/*70A0AF; */
+}
+
+body {
+    height: 300px;
+    width: 400px;
+    background-color: var(--background);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    color: var(--button);
+}
+
+button :hover {
+    cursor: pointer;
+}
+
+#container {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea::placeholder {
+    color: var(--button);
+}
+
+#raw_text {
+    width: 200px;
+    height: 150px;
+    background-color: var(--background-2);
+    color: var(--button);
+    border: solid 3px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#return_text {
+    text-align: center;
+}
+
+.main_button {
+    background: none;
+    border: solid 3px;
+    border-radius: 5px;
+    border-color: var(--button);
+    padding: 1em 2em;
+    color: var(--button);
+    box-shadow: inset 0px 0px 0px 0px var(--button);
+    transition: cubic-bezier(.79,.14,.15,.86) .5s;
+}
+
+.main_button:hover,
+.main_button:focus {
+    box-shadow: inset 400px 0 0 0 var(--button);
+    color: var(--background); /*hsl(230deg,58%,95%);*/
+    border-color: var(--button);
+    cursor: pointer;
+}

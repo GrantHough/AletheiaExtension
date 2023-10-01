@@ -1,5 +1,5 @@
 {
-    "name": "GrantYanisTempExtension",
+    "name": "Aletheia",
     "description": "Verify the veracity of text, powered by AI",
     "manifest_version": 3,
     "version": "0.0.0.1",
@@ -21,11 +21,5 @@
     ],
     "background": {
         "service_worker": "background.js"
-    },
-    "web_accessible_resources": [
-        {
-            "resources": [ "corner_template.html", "corner_template.css"],
-            "matches": [ "<all_urls>" ]
-          }
-    ]
+    }
 }
