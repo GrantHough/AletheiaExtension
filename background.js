@@ -99,7 +99,7 @@ function articleBias(url, sendResponse) {
         }
     })
     .then(data => {
-        console.log(data.opinion)
+        console.log(data.opinion);
         response_text = data.opinion;
         return response_text
     })
