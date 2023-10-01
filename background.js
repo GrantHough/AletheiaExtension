@@ -33,6 +33,7 @@ function verifyText(raw_text, request_source, popup_response) { // Universal che
         body: JSON.stringify({
             text: raw_text, // Gather the text input from the DOM
         }),
+        mode: 'cors',
         headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
     })
     .then(response => {
