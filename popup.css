@@ -67,3 +67,9 @@ textarea::placeholder {
     border-color: var(--button);
     cursor: pointer;
 }
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
