@@ -58,6 +58,7 @@ textarea::placeholder {
     color: var(--button);
     box-shadow: inset 0px 0px 0px 0px var(--button);
     transition: cubic-bezier(.79,.14,.15,.86) .5s;
+    margin: 2.5px;
 }
 
 .main_button:hover,
@@ -72,4 +73,16 @@ textarea::placeholder {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    margin-bottom: 5px;
+}
+
+#top-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#return_text {
+    margin-left: 20px;
+    margin-right: 20px;
 }

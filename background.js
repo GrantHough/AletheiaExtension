@@ -1,6 +1,5 @@
 // Service worker
-// const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
-const checkURL = "http://localhost:1000";
+const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
  
 //let activeURL;
 
@@ -20,13 +19,17 @@ chrome.runtime.onMessage.addListener( // Listener for popup in top right
         if (request.action == "check") {
             const response = verifyText(request.raw_text, "popup", sendResponse); // Call verify function, add sendResponse as function parameter
         }
-        if (request.action == "bias") {
-            console.log("URL to be summarized: " + request.url);
+        if (request.action == "articlebias") {
+            console.log("URL to be bias analyzed: " + request.url);
             const response = articleBias(request.url, sendResponse);
         }
         if (request.action == "summarize") {
             console.log("URL to be summarized: " + request.url);
             const response = articleSummary(request.url, sendResponse);
+        }
+        if (request.action == "background") {
+            console.log("URL to be background checked: " + request.url);
+            const response = articleBackground(request.url, sendResponse);
         }
         return true;
     }
@@ -145,5 +148,41 @@ function articleSummary(url, sendResponse) {
                 sendResponse(response_text);
                 console.log("Response sent to popup")
 
+    });
+}
+
+function articleBackground(url, sendResponse) {
+    console.log("Attempting summary")
+    console.log("URL" + url);
+    fetch(checkURL + "/providerbackground", {
+        method: 'POST',
+        body: JSON.stringify({
+            url: url
+        }),
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
+    })
+    .then(response => {
+        if (response.ok) { // Only decode message if status ok, otherwise throw error
+            return response.json();
+        }
+        else {
+            throw new Error("Error contacting the server: Error Code " + response.status);
+        }
+    })
+    .then(data => {
+        console.log(data.background)
+        response_text = data.background;
+        return response_text
+    })
+    .catch((error) => {
+        console.error(error);
+        response_text = error.background;
+        console.log("response_text:" + response_text)
+        return response_text
+    })
+    .then(response_text => {
+                sendResponse(response_text);
+                console.log("Response sent to popup")
     });
 }

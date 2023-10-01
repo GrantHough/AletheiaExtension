@@ -6,6 +6,7 @@ See popup.css and popup.html*/
 const verify_button = document.getElementById("verify_button");
 const summary_button = document.getElementById("summary_button");
 const bias_button = document.getElementById("bias_button");
+const background_Button = document.getElementById("background_button");
 const settings_button = document.getElementById("settings_button");
 const return_button = document.getElementById("return_button");
 
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
     return_button.addEventListener("click", return_function);
     summary_button.addEventListener("click", articleSummary);
     bias_button.addEventListener("click", articleBias);
+    background_button.addEventListener("click", articleBackground);
 
     function verify_function() {
         return_text.innerHTML = PLACEHOLDER;
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         hide(summary_button);
         hide(bias_button);
         hide(verify_button);
+        hide(background_button);
         show(return_text);
         show(return_button);
         (async () => {
@@ -46,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         show(verify_button);
         show(summary_button)
         show(bias_button);
+        show(background_button);
     }
 
     function set_return_text(message) { // Utility function to improve readability
@@ -61,28 +65,32 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
     }
     function articleBias() {
         return_text.innerHTML = PLACEHOLDER;
-        verify_button.removeEventListener("click", verify_function); // Prevent the button from being spammed by unbinding callback
         hide(raw_text);
         hide(summary_button);
         hide(bias_button);
         hide(verify_button);
+        hide(background_button);
         show(return_text);
         show(return_button);
-        var url = getURL();
-        set_return_text("Analyzing Bias at URL: " + url)
         (async () => {
-            const response = await chrome.runtime.sendMessage({action: "bias", url: url});
-            set_return_text(response);
+            const url = await chrome.tabs.query({ active: true, currentWindow: true})
+            .then( tabs => {
+                var url = tabs[0].url;
+                set_return_text("Analyzing Bias at URL: " + url)
+                return url;
+            })
+            const response = await chrome.runtime.sendMessage({action: "articlebias", url: url});
+            set_return_text(response.toFixed(2)*100 + "%");
             console.log(response);
           })();
     }
     function articleSummary() {
         return_text.innerHTML = PLACEHOLDER;
-        verify_button.removeEventListener("click", verify_function); // Prevent the button from being spammed by unbinding callback
         hide(raw_text);
         hide(summary_button);
         hide(bias_button);
         hide(verify_button);
+        hide(background_button);
         show(return_text);
         show(return_button);
         (async () => {
@@ -96,7 +104,27 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
             set_return_text(response);
             console.log(response);
           })();
-        verify_button.addEventListener("click", verify_function); // Rebind callback so the button can be clicked again
+    }
+    function articleBackground() {
+        return_text.innerHTML = PLACEHOLDER;
+        hide(raw_text);
+        hide(summary_button);
+        hide(bias_button);
+        hide(verify_button);
+        hide(background_button);
+        show(return_text);
+        show(return_button);
+        (async () => {
+            const url = await chrome.tabs.query({ active: true, currentWindow: true})
+            .then( tabs => {
+                var url = tabs[0].url;
+                set_return_text("Finding background of URL: " + url)
+                return url;
+            })
+            const response = await chrome.runtime.sendMessage({action: "background", url: url});
+            set_return_text(response);
+            console.log(response);
+          })();
     }
 
 function getURL() {
