@@ -68,8 +68,10 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         hide(verify_button);
         show(return_text);
         show(return_button);
+        var url = getURL();
+        set_return_text("Analyzing Bias at URL: " + url)
         (async () => {
-            const response = await chrome.runtime.sendMessage({action: "bias"});
+            const response = await chrome.runtime.sendMessage({action: "bias", url: url});
             set_return_text(response);
             console.log(response);
           })();
@@ -83,11 +85,24 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         hide(verify_button);
         show(return_text);
         show(return_button);
+        var url = getURL();
+        set_return_text("Summarizing Article at URL: " + url)
         (async () => {
-            const response = await chrome.runtime.sendMessage({action: "summarize"});
+            const response = await chrome.runtime.sendMessage({action: "summarize", url: url});
             set_return_text(response);
             console.log(response);
           })();
         verify_button.addEventListener("click", verify_function); // Rebind callback so the button can be clicked again
+    }
+
+    function getURL() {
+        var query = { active: true, currentWindow: true}
+        let url
+        function callback(tabs) {
+            url = tabs[0];
+            console.log(url);
+        }
+        chrome.tabs.query(query, callback)
+        return url;
     }
 });
