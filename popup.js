@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
                 set_return_text("Analyzing Bias at URL: " + url)
                 return url;
             })
-            const response = await chrome.runtime.sendMessage({action: "articlebias", url: url});
-            set_return_text(response.toFixed(2)*100 + "%");
+            const response = await chrome.runtime.sendMessage({action: "bias", url: url});
+            set_return_text(response);
             console.log(response);
           })();
     }
