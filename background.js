@@ -19,9 +19,11 @@ chrome.runtime.onMessage.addListener( // Listener for popup in top right
             const response = verifyText(request.raw_text, "popup", sendResponse); // Call verify function, add sendResponse as function parameter
         }
         if (request.action == "bias") {
+            console.log("URL to be summarized: " + request.url);
             const response = articleBias(request.url, sendResponse);
         }
         if (request.action == "summarize") {
+            console.log("URL to be summarized: " + request.url);
             const response = articleSummary(request.url, sendResponse);
         }
         return true;
