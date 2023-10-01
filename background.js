@@ -101,11 +101,12 @@ function articleBias(url, sendResponse) {
     .catch((error) => {
         console.error(error);
         response_text = error.opinion;
-        console.log("response_text:" + response_text)
+        console.log("response_text:" + response_text);
         return response_text
     })
     .then(response_text => {
-                sendResponse(response_text);
+                value = Math.trunc(response_text*10000)/100 + "%";
+                sendResponse(value);
                 console.log("Response sent to popup")
 
     });

@@ -68,9 +68,13 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         hide(verify_button);
         show(return_text);
         show(return_button);
-        var url = getURL();
-        set_return_text("Analyzing Bias at URL: " + url)
         (async () => {
+            const url = await chrome.tabs.query({ active: true, currentWindow: true})
+            .then( tabs => {
+                var url = tabs[0].url;
+                set_return_text("Analyzing Bias at URL: " + url)
+                return url;
+            })
             const response = await chrome.runtime.sendMessage({action: "bias", url: url});
             set_return_text(response);
             console.log(response);
