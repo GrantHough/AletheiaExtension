@@ -1,6 +1,5 @@
 // Service worker
-// const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app";
-const checkURL = "http://localhost:1000";
+const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"
  
 //let activeURL;
 
