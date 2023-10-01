@@ -110,8 +110,7 @@ function articleBias(url, sendResponse) {
         return response_text
     })
     .then(response_text => {
-                value = Math.trunc(response_text*10000)/100 + "%";
-                sendResponse(value);
+                sendResponse(response_text);
                 console.log("Response sent to popup")
 
     });
