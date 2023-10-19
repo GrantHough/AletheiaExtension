@@ -22,15 +22,18 @@ chrome.runtime.onMessage.addListener( // Listener for popup in top right
         }
         if (request.action == "articlebias") {
             console.log("URL to be bias analyzed: " + request.url);
-            const response = articleBias(request.url, sendResponse);
+            const response = articleOperation("articlebias", request.url, sendResponse);
+            //const response = articleBias(request.url, sendResponse);
         }
         if (request.action == "summarize") {
             console.log("URL to be summarized: " + request.url);
-            const response = articleSummary(request.url, sendResponse);
+            const response = articleOperation("summarize", request.url, sendResponse);
+            //const response = articleSummary(request.url, sendResponse);
         }
         if (request.action == "background") {
             console.log("URL to be background checked: " + request.url);
-            const response = articleBackground(request.url, sendResponse);
+            const response = articleOperation("background", request.url, sendResponse)
+            //const response = articleBackground(request.url, sendResponse);
         }
         return true;
     }
@@ -77,6 +80,60 @@ function verifyText(raw_text, request_source, popup_response) { // Universal che
 
     });
 }
+
+function articleOperation(operation, url, sendResponse) {            // Universal function for all article-wide operations
+    console.log("Attempting article operation: " + operation);
+    console.log("articleOperation, url is " + url);
+    if (operation == "background") { operation = "providerbackground";} // TEMP SOLUTION naming convention problem
+    console.log("Fetching path: " + checkURL + "/" + operation);
+    fetch(checkURL + "/" + operation, {
+        method: 'POST',
+        body: JSON.stringify({
+            url: url
+        }),
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            throw new Error("Error contacting the server: Error Code " + response.status);
+        }
+    })
+    .then(data => {                                                 // Unpack data according to operation, throw errors as needed
+        if(operation == "articlebias") {
+            console.log("Server returned: " + data.opinion);
+            response_text = data.opinion;
+        }
+        if(operation == "summarize") {
+            console.log("Server returned: " + data.summary);
+            response_text = data.summary;
+        }
+        if(operation == "providerbackground") {
+            console.log("Server returned" + data.background);
+            response_text = data.background;
+        }
+        if(response_text) {
+            return response_text;
+        }
+        else {
+            throw new Error("Server response unpalatable")
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        response_text = error;
+        return response_text;
+    })
+    .then(response_text => {
+        sendResponse(response_text);                                // Use callback function to message back to popup.js
+        console.log("Sending to popup: " + response_text);
+    })
+}
+
+/* LEGACY PAST THIS LINE*/
 
 function articleBias(url, sendResponse) {
     console.log("Attempting bias check");

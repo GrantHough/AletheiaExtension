@@ -80,7 +80,12 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
                 return url;
             });
             const response = await chrome.runtime.sendMessage({action: "articlebias", url: url});
-            set_return_text(response.toFixed(2)*100 + "%");
+            if (response === 'number') {
+                set_return_text(response.toFixed(2)*100 + "%");
+            }
+            else {
+                set_return_text(response);
+            }
             console.log(response);
           })();
     }
