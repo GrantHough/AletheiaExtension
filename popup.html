@@ -4,19 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GrantYanisTempExtension</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900,1000">
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
     <h1> Aletheia </h1>
-    <div id="top-container">
+    <h2> Article Statistics:</h2>
+    <div id="score-container">
+        <div id="bias-container">
+            <div id="bias-blob" class="score-blob" style="background-color: #ff963a;">
+                <span id="bias-score" class="score-number">##</span>
+            </div>
+            <h2 id="bias-description" class="score-description"> Opinion</h2>
+        </div>
+        <div id="trending-container">
+            <div id="trending-blob" class="score-blob" style="background-color: #ff6c4b;">
+                <span id="trending-score" class="score-number">##</span>
+            </div> 
+            <h2 id="trending-description" class="score-description"> Trending</h2>
+        </div>
+        <div id="depth-container">
+            <div id="depth-blob" class="score-blob" style="background-color: #84f787;">
+                <span id="depth-score" class="score-number">##</span>
+            </div>
+            <h2 id="depth-description" class="score-description">Depth</h2>
+        </div>
+    </div>
+    <div id="top-container" style="display:none">
         <textarea id="raw_text" placeholder="Copy paste a passage here..."></textarea>
         <p id="return_text" style="display: none;"> Status Unknown </p>
-        <button id="verify_button" class="main_button"> Analyze </button>
     </div>
     <div id="button-container">
-        <button id="summary_button" class="main_button"> Summarize </button>
-        <button id="bias_button" class="main_button"> Bias </button>
-        <button id="background_button" class="main_button"> Background </button>
+        <button id="verify_button" class="main_button"> Analyze Passage</button>
+        <button id="summary_button" class="main_button"> Summarize Article </button>
+        <button id="bias_button" class="main_button"> Bias Report </button>
+        <button id="background_button" class="main_button"> Provider Background </button>
     </div>
     <button id="return_button" class="main_button" style="display: none;"> New Request </button>
 </body>

@@ -1,26 +1,103 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+}
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+display: block;
+max-width: 100%;
+}
+input, button, textarea, select {
+font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+overflow-wrap: break-word;
+}
+#root, #__next {
+isolation: isolate;
+}
+
 :root {
     --background: #faedcd; /*E2DCCA; /*FCE694;*/
     --button: #36393B;/*2E382E; /*36393B; /*373737; */
     --background-2: #fefae0; /*ADB0C2; /*BAA1B6;/*A99985;/*70A0AF; */
+    font-family: 'Inter';
+    font-smooth: auto;
 }
+
+:root {
+    --shadow-color: 0deg 0% 0%;
+    --shadow-elevation-low:
+      0.3px 0.5px 0.4px hsl(var(--shadow-color) / 0.23),
+      0.4px 0.7px 0.6px -2.5px hsl(var(--shadow-color) / 0.15),
+      1.3px 2.1px 1.9px -5px hsl(var(--shadow-color) / 0.08);
+    --shadow-elevation-medium:
+      0.3px 0.5px 0.4px hsl(var(--shadow-color) / 0.19),
+      0.4px 0.6px 0.5px -1.2px hsl(var(--shadow-color) / 0.15),
+      1.1px 1.7px 1.5px -2.5px hsl(var(--shadow-color) / 0.11),
+      3px 4.6px 4.1px -3.7px hsl(var(--shadow-color) / 0.08),
+      6.6px 10.3px 9.2px -5px hsl(var(--shadow-color) / 0.04);
+    --shadow-elevation-high:
+      0.3px 0.5px 0.4px hsl(var(--shadow-color) / 0.18),
+      0.4px 0.6px 0.5px -0.6px hsl(var(--shadow-color) / 0.16),
+      0.7px 1.1px 1px -1.1px hsl(var(--shadow-color) / 0.14),
+      1.6px 2.5px 2.2px -1.7px hsl(var(--shadow-color) / 0.12),
+      3.3px 5.2px 4.6px -2.2px hsl(var(--shadow-color) / 0.11),
+      6.2px 9.7px 8.6px -2.8px hsl(var(--shadow-color) / 0.09),
+      10.5px 16.3px 14.5px -3.3px hsl(var(--shadow-color) / 0.07),
+      16.5px 25.6px 22.8px -3.9px hsl(var(--shadow-color) / 0.05),
+      24.4px 38px 33.9px -4.4px hsl(var(--shadow-color) / 0.04),
+      34.6px 53.9px 48px -5px hsl(var(--shadow-color) / 0.02);
+  }
 
 body {
     height: 300px;
     width: 400px;
     background-color: var(--background);
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    font-family: Inter;
+
+    display: grid;
+    grid-template-rows: 40px 40px 110px 1fr 1fr;
+    text-align: center;
 }
 
 h1 {
     color: var(--button);
+    font-weight: 400;
+    padding: 20px;
+}
+
+h2 {
+    color: var(--button);
+    font-weight: 300;
+    font-size: 1rem;
+    padding: 20px;
+}
+
+span {
+    font-family: Inter;
+    color: var(--button)
 }
 
 button :hover {
     cursor: pointer;
+}
+
+button {
+    font-family: Inter;
+}
+
+textarea {
+    font-family: Inter;
 }
 
 #container {
@@ -51,14 +128,18 @@ textarea::placeholder {
 
 .main_button {
     background: none;
-    border: solid 3px;
+    border: solid 1px;
     border-radius: 5px;
     border-color: var(--button);
     padding: 1em 2em;
     color: var(--button);
     box-shadow: inset 0px 0px 0px 0px var(--button);
-    transition: cubic-bezier(.79,.14,.15,.86) .5s;
+    transition: cubic-bezier(.79,.14,.15,.86) .35s;
     margin: 2.5px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: fit-content;
+    height: fit-content;
 }
 
 .main_button:hover,
@@ -72,8 +153,11 @@ textarea::placeholder {
 #button-container {
     display: flex;
     flex-direction: row;
-    gap: 10px;
     margin-bottom: 5px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
 #top-container {
@@ -85,4 +169,39 @@ textarea::placeholder {
 #return_text {
     margin-left: 20px;
     margin-right: 20px;
+}
+
+#score-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5vw;
+    font-size: 0.8rem;
+    padding: 9px;
+}
+
+.score-blob {
+    border-radius: 50%;
+    width: 10vw;
+    min-width: 50px;
+    height: 10vw;
+    min-height: 50px;
+    border: solid 3px #fff;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: var(--shadow-elevation-high);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.score-number {
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.hidden  {
+    display: none;
 }
