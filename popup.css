@@ -26,6 +26,17 @@ overflow-wrap: break-word;
 isolation: isolate;
 }
 
+hr {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    height: 2px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid black;
+}
+
 :root {
     --background: #faedcd; /*E2DCCA; /*FCE694;*/
     --button: #36393B;/*2E382E; /*36393B; /*373737; */
@@ -60,20 +71,21 @@ isolation: isolate;
   }
 
 body {
-    height: 300px;
-    width: 400px;
+    height: 390px;
+    width: 360px;
     background-color: var(--background);
     font-family: Inter;
 
-    display: grid;
-    grid-template-rows: 60px 20px 100px 20px 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
 h1 {
     color: var(--button);
     font-weight: 400;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 h2 {
@@ -102,6 +114,11 @@ textarea::placeholder {
     color: var(--button);
 }
 
+#title {
+    margin-top: 20px;
+    margin-bottom: 6px;
+}
+
 #raw_text {
     width: 200px;
     height: 150px;
@@ -123,6 +140,7 @@ textarea::placeholder {
     border-color: var(--button);
     padding: .3rem .7rem;
     color: var(--button);
+    font-weight: 200;
     box-shadow: inset 0px 0px 0px 0px var(--button);
     transition: cubic-bezier(.79,.14,.15,.86) .35s;
     margin: 2.5px;
@@ -149,7 +167,7 @@ textarea::placeholder {
     align-items: center;
     flex-wrap: wrap;
     margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 24px;
 }
 
 #top-container {
@@ -171,20 +189,21 @@ textarea::placeholder {
     padding: 9px;
     margin-left: 40px;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .score-blob {
     border-radius: 50%;
-    width: 10vw;
+    width: 18vw;
     min-width: 50px;
-    height: 10vw;
+    height: 18vw;
     min-height: 50px;
     border: solid 3px #fff;
     background-color: #fff;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: var(--shadow-elevation-high);
-    
+    /* box-shadow: var(--shadow-elevation-high); */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -193,7 +212,7 @@ textarea::placeholder {
 
 .score-number {
     font-weight: 300;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
 }
 
 .score-description {
@@ -201,12 +220,18 @@ textarea::placeholder {
 }
 
 .section-heading {
-    border-top: solid 1px;
-    width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .hidden  {
     display: none;
+}
+
+#function-heading {
+    margin-top: 8px;
 }
