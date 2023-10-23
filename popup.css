@@ -116,7 +116,6 @@ textarea::placeholder {
 
 #title {
     margin-top: 20px;
-    margin-bottom: 6px;
 }
 
 #raw_text {
@@ -225,15 +224,10 @@ textarea::placeholder {
     margin-top: 4px;
     margin-bottom: 8px;
     font-weight: 400;
-    font-size: 16px;
 }
 
 .hidden  {
     display: none;
-}
-
-#function-heading {
-    margin-top: 8px;
 }
 
 #length-container {
