@@ -1,5 +1,5 @@
 // Service worker
-const checkURL = "https://localhost:8000" //"https://aletheianode-ez7hynivba-uc.a.run.app"
+const checkURL = "http://localhost:8000" //"https://aletheianode-ez7hynivba-uc.a.run.app"
  
 //let activeURL;
 
@@ -66,17 +66,18 @@ function verifyText(raw_text, request_source, popup_response) { // Universal che
     .then(data => {
         console.log(data.message)
         response_text = data.message;
-        return response_text
+        return response_text;
     })
     .catch((error) => {
         console.error(error);
         response_text = error.message;
         console.log("response_text:" + response_text)
-        return response_text
+        return response_text;
     })
     .then(response_text => {
-                popup_response(response_text);
-                console.log("Response sent to popup")
+        console.log(response_text);
+        // popup_response(response_text);
+        // console.log("Response sent to popup")
 
     });
 }
@@ -203,8 +204,8 @@ function articleSummary(url, sendResponse) {
         return response_text
     })
     .then(response_text => {
-                sendResponse(response_text);
-                console.log("Response sent to popup")
+        sendResponse(response_text);
+        console.log("Response sent to popup")
 
     });
 }
