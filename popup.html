@@ -9,45 +9,49 @@
 </head>
 <body>
     <h1 id="title">Aletheia</h1>
-    <h2 class="section-heading">Article Statistics:</h2>
-    <hr>
-    <div id="length-container">
-        <h4 id="words" class="length-metric"><a class="length-num">259</a> words</h4>
-        <h4 id="time" class="length-metric"><a class="length-num">3</a> minutes</h4>
-    </div>
-    <div id="score-container">
-        <div id="bias-container">
-            <div id="bias-blob" class="score-blob" style="background-color: #ff963a;">
-                <span id="bias-score" class="score-number">39</span>
+    <div id="score-outer-container">
+        <h2 class="section-heading">Article Statistics:</h2>
+        <hr>
+        <div id="length-container">
+            <h4 class="length-metric"><a id="word-count"class="length-num">259</a> words</h4>
+            <h4 class="length-metric"><a id="read-time" class="length-num">3</a> minutes</h4>
+        </div>
+        <div id="score-container">
+            <div id="bias-container">
+                <div id="bias-blob" class="score-blob" style="background-color: #ff963a;">
+                    <span id="bias-score" class="score-number">39</span>
+                </div>
+                <h2 id="bias-description" class="score-description"> Opinion</h2>
             </div>
-            <h2 id="bias-description" class="score-description"> Opinion</h2>
-        </div>
-        <div id="trending-container">
-            <div id="trending-blob" class="score-blob" style="background-color: #ff6c4b;">
-                <span id="trending-score" class="score-number">14</span>
-            </div> 
-            <h2 id="trending-description" class="score-description"> Trending</h2>
-        </div>
-        <div id="depth-container">
-            <div id="depth-blob" class="score-blob" style="background-color: #84f787;">
-                <span id="depth-score" class="score-number">89</span>
+            <div id="trending-container">
+                <div id="trending-blob" class="score-blob" style="background-color: #ff6c4b;">
+                    <span id="trending-score" class="score-number">14</span>
+                </div> 
+                <h2 id="trending-description" class="score-description"> Trending</h2>
             </div>
-            <h2 id="depth-description" class="score-description">Depth</h2>
+            <div id="depth-container">
+                <div id="depth-blob" class="score-blob" style="background-color: #84f787;">
+                    <span id="depth-score" class="score-number">89</span>
+                </div>
+                <h2 id="depth-description" class="score-description">Depth</h2>
+            </div>
         </div>
     </div>
-    <div id="top-container" style="display:none">
+    <div id="text-outer-container" style="display:none">
         <textarea id="raw_text" placeholder="Copy paste a passage here..."></textarea>
         <p id="return_text" style="display: none;"> Status Unknown </p>
+        <button id="request_button" class="main_button"> Analyze Passage </button>
+        <button id="return_button" class="main_button"> Return to Dashboard </button>
     </div>
-    <h2 id="function-heading" class="section-heading"> Article Functions:</h2>
-    <hr>
-    <div id="button-container">
-        <button id="verify_button" class="main_button"> Analyze Passage</button>
-        <button id="summary_button" class="main_button"> Summarize Article </button>
-        <button id="bias_button" class="main_button"> Bias Report </button>
-        <button id="background_button" class="main_button"> Provider Background </button>
+    <div id="function-outer-container">
+        <h2 id="function-heading" class="section-heading"> Article Functions:</h2>
+        <hr>
+        <div id="button-container">
+            <button id="verify_button" class="main_button"> Fact-Check Passage </button>
+            <button id="summary_button" class="main_button"> Summarize Article </button>
+            <button id="background_button" class="main_button"> Provider Background </button>
+        </div>
     </div>
-    <button id="return_button" class="main_button" style="display: none;"> Return to Dashboard </button>
 </body>
 <script src="popup.js"></script>
 </html>
