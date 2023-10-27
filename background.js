@@ -16,13 +16,13 @@ chrome.contextMenus.onClicked.addListener(verifyHelper); // Listener for right-c
 
 chrome.runtime.onMessage.addListener( // Listener for popup in top right
     function(request, sender, sendResponse) {
-
+        console.log("Request received from popup script, action is: " + request.action)
         if (request.action == "check") {
             const response = verifyText(request.raw_text, "popup", sendResponse); // Call verify function, add sendResponse as function parameter
         }
-        if (request.action == "articlebias") {
-            console.log("URL to be bias analyzed: " + request.url);
-            const response = articleOperation("articlebias", request.url, sendResponse);
+        if (request.action == "scores") {
+            console.log("URL to be scored: " + request.url);
+            const response = articleOperation("scores", request.url, sendResponse);
             //const response = articleBias(request.url, sendResponse);
         }
         if (request.action == "summarize") {
@@ -76,8 +76,8 @@ function verifyText(raw_text, request_source, popup_response) { // Universal che
     })
     .then(response_text => {
         console.log(response_text);
-        // popup_response(response_text);
-        // console.log("Response sent to popup")
+        popup_response(response_text);
+        console.log("Response sent to popup")
 
     });
 }
@@ -106,15 +106,27 @@ function articleOperation(operation, url, sendResponse) {            // Universa
     .then(data => {                                                 // Unpack data according to operation, throw errors as needed
         if(operation == "articlebias") {
             console.log("Server returned: " + data.opinion);
-            response_text = data.opinion;
+            var response_text = data.opinion;
         }
         if(operation == "summarize") {
             console.log("Server returned: " + data.summary);
-            response_text = data.summary;
+            var response_text = data.summary;
         }
         if(operation == "providerbackground") {
             console.log("Server returned" + data.background);
-            response_text = data.background;
+            var response_text = data.background;
+        }
+        if(operation == "scores") {
+            var scores = {
+                wordCount: data.wordCount,
+                readTime: data.readTime,
+                biasScore: data.bias,
+                trendingScore: data.popularity,
+                depthScore: data.depth
+            }
+            console.log("Server returned: ");
+            console.log(scores);
+            var response_text = scores;
         }
         if(response_text) {
             return response_text;

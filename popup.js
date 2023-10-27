@@ -22,6 +22,11 @@ const biasScore = document.getElementById("bias-score");
 const trendingScore = document.getElementById("trending-score");
 const depthScore = document.getElementById("depth-score");
 
+// Blobs
+const biasBlob = document.getElementById("bias-blob");
+const trendingBlob = document.getElementById("trending-blob");
+const depthBlob = document.getElementById("depth-blob");
+
 // Containers
 const scoreOuterContainer = document.getElementById("score-outer-container");
 const textOuterContainer = document.getElementById("text-outer-container");
@@ -39,20 +44,28 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
     findArticleScores();        // Automatically when DOM loads
 
     function findArticleScores() {
-        (async () => {
-            const response = await chrome.runtime.sendMessage({action:"scores"});
-            setArticleScores(response);
-        })
+        articleReport("scores");
     }
     function setArticleScores(scores) {
-        wordCount.innerHTML = scores.wordCount;
-        readTime.innerHTML = scores.readTime;
-        biasScore.innerHTML = scores.biasScore;
-        trendingScore.innerHTML = scores.trendingScore;
-        depthScore.innerHTML = scores.depthScore;
-        return
+        wordCount.innerHTML = "" + scores.wordCount;
+        readTime.innerHTML = "" + scores.readTime;
+        biasScore.innerHTML = "" + scores.biasScore;
+        trendingScore.innerHTML = "" + scores.trendingScore;
+        depthScore.innerHTML = "" + scores.depthScore;
+        biasBlob.style.background = hslToHex((100-biasScore), 100, 50); // Since bias score is opposite;
+        trendingBlob.style.background = hslToHex(trendingScore, 100, 50);
+        depthBlob.style.background = hslToHex(depthScore, 100, 50);
     }
-
+    function hslToHex(h, s, l) {
+        l /= 100;
+        const a = s * Math.min(l, 1 - l) / 100;
+        const f = n => {
+            const k = (n + h / 30) % 12;
+            const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+            return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+        };
+        return `#${f(0)}${f(8)}${f(4)}`;
+    }
     function statementWindow() { // Manipulate UI to show place to paste text for statement validation.
         hide(scoreOuterContainer);
         hide(functionOuterContainer);
@@ -97,10 +110,12 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
     function set_return_text(message) { // Utility function to improve readability
         return_text.innerHTML = message;
         show(return_button);
+        hide(raw_text);
+        show(return_text);
     }
 
     function show(element) { // Utility function to show given element
-        element.style.display = "block";
+        element.style.display = "";
     }
 
     function hide (element) { // Utility function to hide given element
@@ -139,10 +154,12 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         articleReport("background");
     }
     function articleReport(reportType) {
-        return_text.innerHTML = PLACEHOLDER;
-        hideAll();
-        show(textOuterContainer);
-        show(return_text);
+        if (reportType != "scores") {
+            return_text.innerHTML = PLACEHOLDER;
+            hideAll();
+            show(textOuterContainer);
+            show(return_text);
+        }
         (async () => {
             const url = await chrome.tabs.query({ active: true, currentWindow: true})
             .then( tabs => {
@@ -151,8 +168,14 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
                 return url;
             })
             const response = await chrome.runtime.sendMessage({action: reportType, url: url});
-            set_return_text(response);
-            console.log(response);
+            if (reportType == "scores") {
+                console.log("" + response)
+                setArticleScores(response);
+            }
+            else {
+                set_return_text(response);
+                console.log(response);
+            }
           })();
     }
 });

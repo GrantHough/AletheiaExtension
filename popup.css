@@ -119,13 +119,14 @@ textarea::placeholder {
 }
 
 #raw_text {
-    width: 200px;
-    height: 150px;
+    width: 325px;
+    height: 225px;
     background-color: var(--background-2);
     color: var(--button);
-    border: solid 3px;
+    border: solid 1px;
     border-radius: 5px;
     padding: 5px;
+    margin: 10px;
 }
 
 #return_text {
@@ -158,24 +159,28 @@ textarea::placeholder {
     cursor: pointer;
 }
 
+#function-outer-container {
+    width: 100%;
+}
+
 #button-container {
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
     justify-content: center;
     align-items: center;
-    margin-top: auto;
+    margin-top: 8px;
 }
 
-#top-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+#function-heading {
+    margin-top: 15px;
 }
 
 #return_text {
     margin-left: 20px;
     margin-right: 20px;
+    max-height: 250px;
+    overflow-y: scroll;
 }
 
 #score-container {
@@ -184,9 +189,9 @@ textarea::placeholder {
     gap: 5vw;
     font-size: 0.8rem;
     padding: 9px;
+    padding-bottom: 0;
     margin-left: 40px;
     margin-right: 40px;
-    margin-top: 4px;
 }
 
 .score-blob {
@@ -214,13 +219,14 @@ textarea::placeholder {
 
 .score-description {
     padding: 10px;
+    padding-bottom: 0;
 }
 
 .section-heading {
     margin-left: auto;
     margin-right: auto;
     margin-top: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-weight: 400;
 }
 
@@ -229,11 +235,13 @@ textarea::placeholder {
 }
 
 #length-container {
-    margin-top: 12px;
+    margin-top: 5px;
     
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
 }
 
 .length-metric {
@@ -243,4 +251,21 @@ textarea::placeholder {
 
 .length-num {
     font-weight: 500;
+}
+
+#text-outer-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.response_button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#return_button {
+    margin-bottom: 10px;
 }
