@@ -1,15 +1,16 @@
 // Service worker
-const checkURL = "http://localhost:8000" //"https://aletheianode-ez7hynivba-uc.a.run.app"
- 
+const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"; //"http://localhost:8000"
+
 //let activeURL;
 
-chrome.contextMenus.removeAll(function() {
-    chrome.contextMenus.create({
-     id: "1",
-     title: "Check with Aletheia",
-     contexts:["selection"],  // ContextType
-     type: "normal"
-    }); })
+// chrome.contextMenus.removeAll(function() {
+//     chrome.contextMenus.create({
+//         id: "1",
+//         title: "Check with Aletheia",
+//         contexts:["selection"],  // ContextType
+//         type: "normal"
+//     }); 
+// });
 
 chrome.contextMenus.onClicked.addListener(verifyHelper); // Listener for right-click context menu
 //chrome.tabs.onUpdated.addListener(getActiveUrl);

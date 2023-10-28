@@ -3,13 +3,18 @@
     "description": "Verify the validty of digital media, powered by AI",
     "manifest_version": 3,
     "version": "0.0.0.1",
+    "icons": {
+        "16": "/assets/logo16.png",
+        "48": "/assets/logo48.png",
+        "128": "/assets/logo128.png"
+    },
     "host_permissions": ["<all_urls>"],
     "action": {
         "default_popup": "popup.html"
     },
     "permissions": [
         "contextMenus",
-        "activeTab",
+        "notifications",
         "scripting"
     ],
     "content_scripts": [

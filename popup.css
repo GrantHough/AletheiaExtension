@@ -119,18 +119,20 @@ textarea::placeholder {
 }
 
 #raw_text {
-    width: 325px;
+    width: 310px;
     height: 225px;
     background-color: var(--background-2);
     color: var(--button);
     border: solid 1px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     margin: 10px;
 }
 
 #return_text {
     text-align: center;
+    margin: 10px 0 10px 0;
+    max-width: 270px;
 }
 
 .main_button {
@@ -166,7 +168,7 @@ textarea::placeholder {
 #button-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     justify-content: center;
     align-items: center;
     margin-top: 8px;
