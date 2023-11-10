@@ -129,7 +129,7 @@ textarea::placeholder {
     margin: 10px;
 }
 
-#return_text {
+#loading_view {
     text-align: center;
     margin: 10px 0 10px 0;
     max-width: 270px;
@@ -178,7 +178,7 @@ textarea::placeholder {
     margin-top: 15px;
 }
 
-#return_text {
+#loading_view {
     margin-left: 20px;
     margin-right: 20px;
     max-height: 250px;
@@ -270,4 +270,36 @@ textarea::placeholder {
 
 #return_button {
     margin-bottom: 10px;
+}
+
+#loading_view {
+    margin-top: 60px;
+}
+
+.loading-text {
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 16px;
+}
+
+.loading-spinner {
+	pointer-events: none;
+	width: 5em;
+	height: 5em;
+	border: 0.35em solid transparent;
+	border-color: rgb(228, 228, 228);
+    box-shadow: 0px 0px 8px 2px rgb(37 44 97 / 15%), 0 0px 0px 0 rgb(93 100 148 / 20%);
+	border-top-color: #3f3f3f;
+	border-radius: 50%;
+	animation: loadingspin 1s linear infinite;
+    margin-top: 24px;
+    margin-bottom: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@keyframes loadingspin {
+	100% {
+			transform: rotate(360deg)
+	}
 }

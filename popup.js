@@ -13,7 +13,7 @@ const requestVerifyButton = document.getElementById("request_button")
 
 // Inputs / Outputs
 const raw_text = document.getElementById("raw_text");
-const return_text = document.getElementById("return_text");
+const loading_view = document.getElementById("loading_view");
 
 // Scores
 const wordCount = document.getElementById("word-count");
@@ -32,7 +32,7 @@ const scoreOuterContainer = document.getElementById("score-outer-container");
 const textOuterContainer = document.getElementById("text-outer-container");
 const functionOuterContainer = document.getElementById("function-outer-container");
 
-const PLACEHOLDER = " Status Unknown ";
+const PLACEHOLDER = "<div class='loading-text'>Fact-checking passage...</div> <div class='loading-spinner'></div>";
 
 document.addEventListener("DOMContentLoaded", function(event) { // Make sure that popup DOM is loaded to prevent possible strange bugs
 
@@ -71,20 +71,20 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         hide(functionOuterContainer);
         show(textOuterContainer);
         show(raw_text);
-        hide(return_text);
+        hide(loading_view);
         show(requestVerifyButton);
         show(return_button);
     }
 
     function verify_function() {
-        return_text.innerHTML = PLACEHOLDER;
+        loading_view.innerHTML = PLACEHOLDER;
         verify_button.removeEventListener("click", verify_function); // Prevent the button from being spammed by unbinding callback
         hideAll();
         show(textOuterContainer);
-        show(return_text);
+        show(loading_view);
         (async () => {
             const response = await chrome.runtime.sendMessage({action: "check", raw_text: raw_text.value});
-            set_return_text(response);
+            set_loading_view(response);
             console.log(response);
           })();
         verify_button.addEventListener("click", verify_function); // Rebind callback so the button can be clicked again
@@ -104,14 +104,14 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         hide(return_button);
         hide(requestVerifyButton);
         hide(raw_text);
-        hide(return_text);
+        hide(loading_view);
     }
 
-    function set_return_text(message) { // Utility function to improve readability
-        return_text.innerHTML = message;
+    function set_loading_view(message) { // Utility function to improve readability
+        loading_view.innerHTML = message;
         show(return_button);
         hide(raw_text);
-        show(return_text);
+        show(loading_view);
     }
 
     function show(element) { // Utility function to show given element
@@ -122,49 +122,50 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
         element.style.display = "none";
     }/*
     function articleBias() {                    LEGACY FUNCTION
-        return_text.innerHTML = PLACEHOLDER;
+        loading_view.innerHTML = PLACEHOLDER;
         hide(raw_text);
         hide(summary_button);
         hide(bias_button);
         hide(verify_button);
         hide(background_button);
-        show(return_text);
+        show(loading_view);
         show(return_button);
         (async () => {
             const url = await chrome.tabs.query({ active: true, currentWindow: true})
             .then( tabs => {
                 var url = tabs[0].url;
-                set_return_text("Analyzing Bias at URL: " + url)
+                set_loading_view("Analyzing Bias at URL: " + url)
                 return url;
             });
             const response = await chrome.runtime.sendMessage({action: "articlebias", url: url});
             if (response === 'number') {
-                set_return_text(response.toFixed(2)*100 + "%");
+                set_loading_view(response.toFixed(2)*100 + "%");
             }
             else {
-                set_return_text(response);
+                set_loading_view(response);
             }
             console.log(response);
           })();
     }*/
     function articleSummary() {
-        articleReport("summarize");
+        articleReport("summary");
     }
     function articleBackground() {
         articleReport("background");
     }
     function articleReport(reportType) {
         if (reportType != "scores") {
-            return_text.innerHTML = PLACEHOLDER;
+            loading_view.innerHTML = PLACEHOLDER;
             hideAll();
             show(textOuterContainer);
-            show(return_text);
+            show(loading_view);
         }
         (async () => {
             const url = await chrome.tabs.query({ active: true, currentWindow: true})
             .then( tabs => {
                 var url = tabs[0].url;
-                set_return_text("Finding " + reportType + " of URL: " + url)
+                set_loading_view("<div class='loading-text'>Finding " + reportType + " of the article...</div> <div class='loading-spinner'></div>");
+                // set_loading_view("Finding " + reportType + " of URL: " + url)
                 return url;
             })
             const response = await chrome.runtime.sendMessage({action: reportType, url: url});
@@ -173,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
                 setArticleScores(response);
             }
             else {
-                set_return_text(response);
+                set_loading_view(response);
                 console.log(response);
             }
           })();

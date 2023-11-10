@@ -39,7 +39,11 @@
     </div>
     <div id="text-outer-container" style="display:none">
         <textarea id="raw_text" placeholder="Copy paste a passage here..."></textarea>
-        <p id="return_text" style="display: none;"> Status Unknown </p>
+        <div id="loading_view" style="display: none;"> 
+            <div class="loading-text">Fact-checking passage...</div>
+            <div class="loading-spinner"></div>
+
+        </div>
         <button id="request_button" class="main_button response_button"> Analyze Passage </button>
         <button id="return_button" class="main_button response_button"> Return to Dashboard </button>
     </div>

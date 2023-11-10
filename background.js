@@ -1,6 +1,6 @@
 // Service worker
-const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"; //"http://localhost:8000"
-
+const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app";
+// const checkURL = "http://localhost:8080";
 //let activeURL;
 
 // chrome.contextMenus.removeAll(function() {
@@ -12,7 +12,7 @@ const checkURL = "https://aletheianode-ez7hynivba-uc.a.run.app"; //"http://local
 //     }); 
 // });
 
-chrome.contextMenus.onClicked.addListener(verifyHelper); // Listener for right-click context menu
+// chrome.contextMenus.onClicked.addListener(verifyHelper); // Listener for right-click context menu
 //chrome.tabs.onUpdated.addListener(getActiveUrl);
 
 chrome.runtime.onMessage.addListener( // Listener for popup in top right
@@ -26,9 +26,9 @@ chrome.runtime.onMessage.addListener( // Listener for popup in top right
             const response = articleOperation("scores", request.url, sendResponse);
             //const response = articleBias(request.url, sendResponse);
         }
-        if (request.action == "summarize") {
-            console.log("URL to be summarized: " + request.url);
-            const response = articleOperation("summarize", request.url, sendResponse);
+        if (request.action == "summary") {
+            console.log("URL to be summaryd: " + request.url);
+            const response = articleOperation("summary", request.url, sendResponse);
             //const response = articleSummary(request.url, sendResponse);
         }
         if (request.action == "background") {
@@ -109,7 +109,7 @@ function articleOperation(operation, url, sendResponse) {            // Universa
             console.log("Server returned: " + data.opinion);
             var response_text = data.opinion;
         }
-        if(operation == "summarize") {
+        if(operation == "summary") {
             console.log("Server returned: " + data.summary);
             var response_text = data.summary;
         }
@@ -189,7 +189,7 @@ function articleBias(url, sendResponse) {
 function articleSummary(url, sendResponse) {
     console.log("Attempting summary")
     console.log("URL" + url);
-    fetch(checkURL + "/summarize", {
+    fetch(checkURL + "/summary", {
         method: 'POST',
         body: JSON.stringify({
             url: url
