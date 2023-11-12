@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
     function findArticleScores() {
         articleReport("scores");
     }
+
+    // seperate words and time to read to another request
     function setArticleScores(scores) {
         wordCount.innerHTML = "" + scores.wordCount;
         readTime.innerHTML = "" + scores.readTime;

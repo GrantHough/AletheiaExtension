@@ -13,27 +13,31 @@
         <h2 class="section-heading">Article Statistics:</h2>
         <hr>
         <div id="length-container">
+            <!-- FUTURE WE WILL SEPERATE THIS TO ANOTHER REQUEST -->
             <h4 class="length-metric"><a id="word-count"class="length-num">X</a> words</h4>
             <h4 class="length-metric"><a id="read-time" class="length-num">X</a> minutes</h4>
         </div>
-        <div id="score-container">
-            <div id="bias-container">
+        <div id="scores-container">
+            <div id="bias-container" class="score-container">
                 <div id="bias-blob" class="score-blob" style="background-color: #fff;">
                     <span id="bias-score" class="score-number">XX</span>
                 </div>
                 <h2 id="bias-description" class="score-description"> Opinion</h2>
+                <span class="score-tooltip" id="opinion-score-tooltip">Opinion score (0-100): how biased the writing is</span>
             </div>
-            <div id="depth-container">
+            <div id="depth-container" class="score-container">
                 <div id="depth-blob" class="score-blob" style="background-color: #fff;">
                     <span id="depth-score" class="score-number">XX</span>
                 </div>
                 <h2 id="depth-description" class="score-description">Depth</h2>
+                <span class="score-tooltip" id="depth-score-tooltip">Depth score<br>(0-100): how detailed the writing is</span>
             </div>
-            <div id="trending-container">
+            <div id="trending-container" class="score-container">
                 <div id="trending-blob" class="score-blob" style="background-color: #fff;">
                     <span id="trending-score" class="score-number">XX</span>
                 </div> 
                 <h2 id="trending-description" class="score-description"> Trending</h2>
+                <span class="score-tooltip" id="trending-score-tooltip">Trending score (0-100): how popular the topic is</span>
             </div>
         </div>
     </div>

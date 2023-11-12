@@ -185,7 +185,7 @@ textarea::placeholder {
     overflow-y: scroll;
 }
 
-#score-container {
+#scores-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 5vw;
@@ -302,4 +302,37 @@ textarea::placeholder {
 	100% {
 			transform: rotate(360deg)
 	}
+}
+
+.score-container .score-tooltip {
+    visibility: hidden;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    text-align: center;
+    padding: 10px 10px;
+    width: 120px;
+    border-radius: 8px;
+    /* outline: black solid 1px; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* height: 50px; */
+    position: absolute;
+    /* right: calc(inherit - 200px); doing this is impossible istg */
+    bottom: 296px;
+    z-index: 1;
+}
+
+.score-container:hover .score-tooltip {
+    visibility: visible;
+}
+
+#opinion-score-tooltip {
+    left: 28px;
+}
+
+#depth-score-tooltip {
+    left: 117px;
+}
+
+#trending-score-tooltip {
+    right: 28px;
 }
