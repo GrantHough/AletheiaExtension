@@ -122,46 +122,22 @@ document.addEventListener("DOMContentLoaded", function(event) { // Make sure tha
 
     function hide (element) { // Utility function to hide given element
         element.style.display = "none";
-    }/*
-    function articleBias() {                    LEGACY FUNCTION
-        loading_view.innerHTML = PLACEHOLDER;
-        hide(raw_text);
-        hide(summary_button);
-        hide(bias_button);
-        hide(verify_button);
-        hide(background_button);
-        show(loading_view);
-        show(return_button);
-        (async () => {
-            const url = await chrome.tabs.query({ active: true, currentWindow: true})
-            .then( tabs => {
-                var url = tabs[0].url;
-                set_loading_view("Analyzing Bias at URL: " + url)
-                return url;
-            });
-            const response = await chrome.runtime.sendMessage({action: "articlebias", url: url});
-            if (response === 'number') {
-                set_loading_view(response.toFixed(2)*100 + "%");
-            }
-            else {
-                set_loading_view(response);
-            }
-            console.log(response);
-          })();
-    }*/
+    }
     function articleSummary() {
-        articleReport("summary");
+        loading_view.innerHTML = PLACEHOLDER;
+        hideAll();
+        show(textOuterContainer);
+        show(loading_view);
+        articleReport("summarize");
     }
     function articleBackground() {
+        loading_view.innerHTML = PLACEHOLDER;
+        hideAll();
+        show(textOuterContainer);
+        show(loading_view);
         articleReport("background");
     }
     function articleReport(reportType) {
-        if (reportType != "scores") {
-            loading_view.innerHTML = PLACEHOLDER;
-            hideAll();
-            show(textOuterContainer);
-            show(loading_view);
-        }
         (async () => {
             const url = await chrome.tabs.query({ active: true, currentWindow: true})
             .then( tabs => {

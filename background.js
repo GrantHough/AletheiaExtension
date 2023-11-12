@@ -26,9 +26,9 @@ chrome.runtime.onMessage.addListener( // Listener for popup in top right
             const response = articleOperation("scores", request.url, sendResponse);
             //const response = articleBias(request.url, sendResponse);
         }
-        if (request.action == "summary") {
-            console.log("URL to be summaryd: " + request.url);
-            const response = articleOperation("summary", request.url, sendResponse);
+        if (request.action == "summarize") {
+            console.log("URL to be summarized: " + request.url);
+            const response = articleOperation("summarize", request.url, sendResponse);
             //const response = articleSummary(request.url, sendResponse);
         }
         if (request.action == "background") {
@@ -109,7 +109,7 @@ function articleOperation(operation, url, sendResponse) {            // Universa
             console.log("Server returned: " + data.opinion);
             var response_text = data.opinion;
         }
-        if(operation == "summary") {
+        if(operation == "summarize") {
             console.log("Server returned: " + data.summary);
             var response_text = data.summary;
         }
